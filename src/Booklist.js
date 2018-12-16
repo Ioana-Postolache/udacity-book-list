@@ -11,6 +11,13 @@ class Booklist extends Component{
           booktitle: 'To Kill a Mockingbird',  
           bookauthors: 'Harper Lee',
           status:'Currently Reading'
+         },
+         {width: 128, 
+          height: 188, 
+          backgroundImage: 'url("http://books.google.com/books/content?id=yDtCuFHXbAYC&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE72RRiTR6U5OUg3IY_LpHTL2NztVWAuZYNFE8dUuC0VlYabeyegLzpAnDPeWxE6RHi0C2ehrR9Gv20LH2dtjpbcUcs8YnH5VCCAH0Y2ICaKOTvrZTCObQbsfp4UbDqQyGISCZfGN&source=gbs_api")',
+          booktitle: "Ender's Game",
+          bookauthors: 'Orson Scott Card',
+          status:'Currently Reading'
          }
         ]
        }
@@ -27,27 +34,17 @@ class Booklist extends Component{
                             <h2 className="bookshelf-title">Currently Reading</h2>
                             <div className="bookshelf-books">
                               <ol className="books-grid">
-                                <li>
+                               {books.filter(book=>book.status==='Currently Reading').map((book, index)=><li key={index}>
                                   <Book 
-                                     width={books[0].width}
-                                     height={books[0].height}
-                                     backgroundImage={books[0].backgroundImage}
-                                     booktitle={books[0].booktitle}
-                                     bookauthors={books[0].bookauthors}
-                                     status={books[0].status}
+                                     width={book.width}
+                                     height={book.height}
+                                     backgroundImage={book.backgroundImage}
+                                     booktitle={book.booktitle}
+                                     bookauthors={book.bookauthors}
+                                     status={book.status}
                                    />
-                                </li>
-                                <li>
-                                  <div className="book">
-                                    <div className="book-top">
-                                      <div className="book-cover" style={{ width: 128, height: 188, backgroundImage: 'url("http://books.google.com/books/content?id=yDtCuFHXbAYC&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE72RRiTR6U5OUg3IY_LpHTL2NztVWAuZYNFE8dUuC0VlYabeyegLzpAnDPeWxE6RHi0C2ehrR9Gv20LH2dtjpbcUcs8YnH5VCCAH0Y2ICaKOTvrZTCObQbsfp4UbDqQyGISCZfGN&source=gbs_api")' }}></div>
-                                      <ChangeShelf/>
-                                    </div>
-                                    <div className="book-title">Ender's Game</div>
-                                    <div className="book-authors">Orson Scott Card</div>
-                                  </div>
-                                </li>
-                              </ol>
+                                </li>)}
+                               </ol>
                             </div>
                           </div>
                           <div className="bookshelf">

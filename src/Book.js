@@ -2,20 +2,25 @@ import React, {Component} from 'react'
 import ChangeShelf from './ChangeShelf'
 
 class Book extends Component{
-  onChangeStatus=(booktitle,value)=>{
-    this.props.changeStatus(booktitle,value);
+  onChangeStatus=(ISBN,value)=>{
+    this.props.changeStatus(ISBN,value);
   }
   render(){
-    const {width, height, booktitle, backgroundImage, bookauthors, status} = this.props;
+    const {title, backgroundImage, authors, shelf, ISBN, bookshelves} = this.props;
 
     return(
       <div className="book">
           <div className="book-top">
-          <div className="book-cover" style={{width: width, height: height, backgroundImage: backgroundImage  }}></div>
-          <ChangeShelf status={status} booktitle={booktitle} onChangeStatus={this.onChangeStatus}/>
+          <div className="book-cover" style={{width: 128, height: 192, backgroundImage: `url("${backgroundImage}")`  }}></div>
+          <ChangeShelf 
+            shelf={shelf} 
+            ISBN={ISBN} 
+            bookshelves={bookshelves}
+            onChangeStatus={this.onChangeStatus}
+           />
         </div>
-        <div className="book-title">{booktitle}</div>
-        <div className="book-authors">{bookauthors}</div>
+        <div className="book-title">{title}</div>
+        <div className="book-authors">{authors}</div>
       </div>                          
       )
   }

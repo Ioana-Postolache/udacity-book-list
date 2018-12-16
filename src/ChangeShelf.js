@@ -4,7 +4,7 @@ class ChangeShelf extends Component{
   
   handleChange=event=>{
     event.preventDefault();    
-    this.props.onChangeStatus(this.props.ISBN, event.target.value);
+    this.props.onChangeStatus(this.props.id, event.target.value);
     
   };
   render(){

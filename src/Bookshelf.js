@@ -15,13 +15,15 @@ class Bookshelf extends Component{
         }))
       }))
   }
- changeStatus=(ISBN, value)=>{
+ changeStatus=(id, value)=>{
     this.setState((prevState)=>({
-      books: [...prevState.books.filter(book=>book.industryIdentifiers[0].identifier!==String(ISBN)),
+      books: [...prevState.books.filter(book=>book.id!==id),
               { ...prevState.books
-               .find(book=>book.industryIdentifiers[0].identifier===String(ISBN)),
+               .find(book=>book.id===id),
                shelf:value}] 
     }));
+   BooksAPI.update(this.state.books
+               .find(book=>book.id===id), value)
   }
 
   render(){
@@ -47,7 +49,7 @@ class Bookshelf extends Component{
                                      title={book.title}
                                      authors={book.authors}
                                      shelf={book.shelf}
-                                     ISBN={book.industryIdentifiers[0].identifier}
+                                     id={book.id}
                                      bookshelves={this.props.bookshelves}
                                      changeStatus={this.changeStatus}
                                    />

@@ -1,6 +1,7 @@
 import React from 'react'
 import {BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css'
+import * as BooksAPI from './BooksAPI'
 import Bookshelf from './Bookshelf'
 import SearchPage from './SearchPage'
 
@@ -18,6 +19,27 @@ class BooksApp extends React.Component {
                                 {value:"Read", key:"read"},
                                 {value:"None", key:"none"}];
  
+ state={ 
+      books: []
+       }
+ componentDidMount(){
+    BooksAPI.getAll()
+      .then((books=>{
+        this.setState(()=>({
+          books
+        }))
+      }))
+  }
+ changeStatus=(id, value)=>{
+    this.setState((prevState)=>({
+      books: [...prevState.books.filter(book=>book.id!==id),
+              { ...prevState.books
+               .find(book=>book.id===id),
+               shelf:value}] 
+    }));
+   BooksAPI.update(this.state.books
+               .find(book=>book.id===id), value)
+  }
 
   render() {
     return (
@@ -25,7 +47,13 @@ class BooksApp extends React.Component {
       <Router>
         <div className="app">
             <Route path='/search' render={()=><SearchPage/>}/>
-            <Route exact path='/' render={()=><Bookshelf bookshelves={this.bookshelves}/>}/>
+            <Route exact path='/' render={()=>
+              <Bookshelf 
+                 bookshelves={this.bookshelves}
+                 books={this.state.books}
+                 changeStatus={this.changeStatus}
+             />}
+            />
         </div>
      </Router>
     )

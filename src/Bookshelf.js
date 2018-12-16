@@ -1,33 +1,14 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import Book from './Book'
-import * as BooksAPI from './BooksAPI'
+
+
+
 class Bookshelf extends Component{
  
-    state={ 
-      books: []
-       }
- componentDidMount(){
-    BooksAPI.getAll()
-      .then((books=>{
-        this.setState(()=>({
-          books
-        }))
-      }))
-  }
- changeStatus=(id, value)=>{
-    this.setState((prevState)=>({
-      books: [...prevState.books.filter(book=>book.id!==id),
-              { ...prevState.books
-               .find(book=>book.id===id),
-               shelf:value}] 
-    }));
-   BooksAPI.update(this.state.books
-               .find(book=>book.id===id), value)
-  }
-
+ 
   render(){
-    const {books}=this.state;
+    const {bookshelves, books, changeStatus}=this.props;
 
     return(
      
@@ -38,7 +19,7 @@ class Bookshelf extends Component{
                       </div>
                       <div className="list-books-content">
                         <div>
-                         {this.props.bookshelves.filter(book=>book.key!=="none").map(bookshelf=>
+                         {bookshelves.filter(book=>book.key!=="none").map(bookshelf=>
                           <div className="bookshelf" key={bookshelf.key}>
                             <h2 className="bookshelf-title">{bookshelf.value}</h2>
                             <div className="bookshelf-books">
@@ -50,8 +31,8 @@ class Bookshelf extends Component{
                                      authors={book.authors}
                                      shelf={book.shelf}
                                      id={book.id}
-                                     bookshelves={this.props.bookshelves}
-                                     changeStatus={this.changeStatus}
+                                     bookshelves={bookshelves}
+                                     changeStatus={changeStatus}
                                    />
                                 </li>)}
                                </ol>

@@ -2,9 +2,7 @@ import React, {Component} from 'react'
 import ChangeShelf from './ChangeShelf'
 
 class Book extends Component{
-  onChangeStatus=(id,value)=>{
-    this.props.changeStatus(id,value);
-  }
+  
   render(){
     const {title, backgroundImage, authors, shelf, id, bookshelves} = this.props;
 
@@ -16,7 +14,7 @@ class Book extends Component{
             shelf={shelf} 
             id={id} 
             bookshelves={bookshelves}
-            onChangeStatus={this.onChangeStatus}
+            onChangeStatus={this.props.changeStatus}
            />
         </div>
         <div className="book-title">{title}</div>

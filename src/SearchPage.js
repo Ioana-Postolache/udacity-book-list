@@ -4,13 +4,12 @@ class SearchPage extends Component{
   render(){
     return(
             <div className="search-books">
-                    <Link
-                        className='close-csearch-books'
+               <div className="search-books-bar">
+                      <Link
+                        className='close-search'
                         to='/'>
                         Close
-                    </Link>
-                    <div className="search-books-bar">
-                      <a className="close-search" onClick={() => this.setState({ showSearchPage: false })}>Close</a>
+                      </Link>
                       <div className="search-books-input-wrapper">
                         {/*
                           NOTES: The search from BooksAPI is limited to a particular set of search terms.

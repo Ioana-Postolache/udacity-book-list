@@ -1,9 +1,10 @@
 import React, {Component} from 'react'
 import ChangeShelf from './ChangeShelf'
-class Book extends Component{
-  
- 
 
+class Book extends Component{
+  onChangeStatus=(booktitle,value)=>{
+    this.props.changeStatus(booktitle,value);
+  }
   render(){
     const {width, height, booktitle, backgroundImage, bookauthors, status} = this.props;
 
@@ -11,7 +12,7 @@ class Book extends Component{
       <div className="book">
           <div className="book-top">
           <div className="book-cover" style={{width: width, height: height, backgroundImage: backgroundImage  }}></div>
-          <ChangeShelf status={status}/>
+          <ChangeShelf status={status} booktitle={booktitle} onChangeStatus={this.onChangeStatus}/>
         </div>
         <div className="book-title">{booktitle}</div>
         <div className="book-authors">{bookauthors}</div>

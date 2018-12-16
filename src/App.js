@@ -2,7 +2,7 @@ import React from 'react'
 import {BrowserRouter as Router, Route } from 'react-router-dom';
 //import * as BooksAPI from './BooksAPI'
 import './App.css'
-import Booklist from './Booklist'
+import Bookshelf from './Bookshelf'
 import SearchPage from './SearchPage'
 
 
@@ -14,7 +14,7 @@ class BooksApp extends React.Component {
      * users can use the browser's back and forward buttons to navigate between
      * pages, as well as provide a good URL they can bookmark and share.
      */
-    showSearchPage: false
+    bookshelves:['Currently Reading', 'Want to Read', 'Read']
   }
 
   render() {
@@ -22,7 +22,7 @@ class BooksApp extends React.Component {
       <Router>
         <div className="app">
             <Route path='/search' render={()=><SearchPage/>}/>
-            <Route exact path='/' render={()=><Booklist/>}/>
+            <Route exact path='/' render={()=><Bookshelf bookshelves={this.state.bookshelves}/>}/>
         </div>
      </Router>
     )

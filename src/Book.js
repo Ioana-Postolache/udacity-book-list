@@ -5,7 +5,7 @@ class Book extends Component{
   
   render(){
     const {title, authors} = this.props.book;
-    const backgroundImage= this.props.book.imageLinks.thumbnail;
+    const backgroundImage= this.props.book.imageLinks===undefined?"":this.props.book.imageLinks.thumbnail;
     const {bookshelves, book}= this.props;
     
     return(

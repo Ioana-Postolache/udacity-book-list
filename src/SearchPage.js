@@ -9,28 +9,30 @@ class SearchPage extends Component{
     searchedBooks:[]
     
   }
-  updateQuery = async (query) =>{    
+
+ 
+ updateQuery = (query) =>{    
     this.setState(()=>({
-      query: query.trim()
-    }))    
+      query: query
+    }), console.log('query '+JSON.stringify(this.state.query==='')))    
   }
 
  updateSearchedBooks = async (query, maxResults)=>{
-   await this.updateQuery(query);
-   if(query===''){
-    this.setState({searchedBooks: null})
-   } else{
-     const searchedBooksResults=await BooksAPI.search(query, maxResults);
-     
-       searchedBooksResults.error===undefined
-        ? (this.setState(
-         {searchedBooks: searchedBooksResults
-          .map(book=> ({...book,               
-                    shelf: this.props.getShelf(book.id) })
-                )}))
-         :this.setState({searchedBooks: null})
-   }
+   this.updateQuery(query);
+   query.length===0
+   ?this.setState({searchedBooks: null})
+   :BooksAPI.search(query, maxResults).then(
+         searchedBooksResults=>{
+           searchedBooksResults!==undefined && searchedBooksResults.error===undefined
+           ?this.setState(()=>(
+             {searchedBooks: searchedBooksResults.map(book=> (
+               {...book, shelf: this.props.getShelf(book.id) })
+                )})
+             )
+         : this.setState({searchedBooks: null})})          
+   
 }
+                    
  changeStatus=  async (selectedBook, value)=>{
    await this.setState((prevState)=>({
       searchedBooks: [...prevState.searchedBooks.filter(book=>book.id!==selectedBook.id),
@@ -48,7 +50,8 @@ class SearchPage extends Component{
     const {query, searchedBooks} = this.state;
     const {bookshelves} = this.props;
     const maxResults = 10;
-    
+    console.log('query '+JSON.stringify(this.state.query===''))
+console.log('searchedBooks '+this.state.searchedBooks)
     return(
             <div className="search-books">
                <div className="search-books-bar">
@@ -74,7 +77,7 @@ class SearchPage extends Component{
 
                       </div>
                     </div>
-                    {(searchedBooks!==null && searchedBooks.length!==0)&& (
+                    {(searchedBooks!==null )&& (
                     <div className="search-books-results">
                       <ol className="books-grid">
                        {searchedBooks.map((book, index)=><li key={index}>

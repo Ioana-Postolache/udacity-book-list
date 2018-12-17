@@ -25,13 +25,24 @@ class SearchPage extends Component{
             )}
    );
 }
-   
+ changeStatus=  async (selectedBook, value)=>{
+   await this.setState((prevState)=>({
+      searchedBooks: [...prevState.searchedBooks.filter(book=>book.id!==selectedBook.id),
+              {...prevState.searchedBooks
+               .filter(book=>book.id===selectedBook.id).length===1
+              ?{ ...prevState.searchedBooks
+               .find(book=>book.id===selectedBook.id),
+               shelf:value}
+             :{...selectedBook, shelf:value}}] 
+    }));
+   this.props.changeStatus(selectedBook, value);
+ }
   
   render(){
     const {query, searchedBooks} = this.state;
-    const {bookshelves, changeStatus} = this.props;
+    const {bookshelves} = this.props;
     const maxResults = 10;
-    console.log(searchedBooks);
+    
 
     return(
             <div className="search-books">
@@ -64,7 +75,7 @@ class SearchPage extends Component{
                                   <Book                                     
                                      book={book}
                                      bookshelves={bookshelves}
-                                     changeStatus={changeStatus}
+                                     changeStatus={this.changeStatus}
                                    />
                                 </li>)}
                       </ol>

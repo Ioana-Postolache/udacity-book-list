@@ -14,7 +14,7 @@ class SearchPage extends Component{
  updateQuery = (query) =>{    
     this.setState(()=>({
       query: query
-    }), console.log('query '+JSON.stringify(this.state.query==='')))    
+    }))    
   }
 
  updateSearchedBooks = async (query, maxResults)=>{
@@ -50,8 +50,7 @@ class SearchPage extends Component{
     const {query, searchedBooks} = this.state;
     const {bookshelves} = this.props;
     const maxResults = 10;
-    console.log('query '+JSON.stringify(this.state.query===''))
-console.log('searchedBooks '+this.state.searchedBooks)
+    
     return(
             <div className="search-books">
                <div className="search-books-bar">

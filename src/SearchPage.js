@@ -17,13 +17,19 @@ class SearchPage extends Component{
 
  updateSearchedBooks = async (query, maxResults)=>{
    await this.updateQuery(query);
-   const searchedBooksResults=await BooksAPI.search(query, maxResults);
-   this.setState(
-     {searchedBooks: searchedBooksResults
-      .map(book=> ({...book,               
-                shelf: this.props.getShelf(book.id) })
-            )}
-   );
+   if(query===''){
+    this.setState({searchedBooks: null})
+   } else{
+     const searchedBooksResults=await BooksAPI.search(query, maxResults);
+     
+       searchedBooksResults.error===undefined
+        ? (this.setState(
+         {searchedBooks: searchedBooksResults
+          .map(book=> ({...book,               
+                    shelf: this.props.getShelf(book.id) })
+                )}))
+         :this.setState({searchedBooks: null})
+   }
 }
  changeStatus=  async (selectedBook, value)=>{
    await this.setState((prevState)=>({
@@ -43,7 +49,6 @@ class SearchPage extends Component{
     const {bookshelves} = this.props;
     const maxResults = 10;
     
-
     return(
             <div className="search-books">
                <div className="search-books-bar">
@@ -69,6 +74,7 @@ class SearchPage extends Component{
 
                       </div>
                     </div>
+                    {(searchedBooks!==null && searchedBooks.length!==0)&& (
                     <div className="search-books-results">
                       <ol className="books-grid">
                        {searchedBooks.map((book, index)=><li key={index}>
@@ -80,6 +86,7 @@ class SearchPage extends Component{
                                 </li>)}
                       </ol>
                     </div>
+                    )}
                   </div>
      )
   }

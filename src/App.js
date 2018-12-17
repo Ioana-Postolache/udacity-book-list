@@ -19,7 +19,7 @@ class BooksApp extends React.Component {
                                 {value:"Read", key:"read"},
                                 {value:"None", key:"none"}];
  
- state={ 
+    state={ 
       books: []
        }
  componentDidMount(){
@@ -30,28 +30,43 @@ class BooksApp extends React.Component {
         }))
       }))
   }
- changeStatus=(id, value)=>{
-    this.setState((prevState)=>({
-      books: [...prevState.books.filter(book=>book.id!==id),
-              { ...prevState.books
-               .find(book=>book.id===id),
-               shelf:value}] 
+ changeStatus=async (selectedBook, value)=>{
+
+    await this.setState((prevState)=>({
+      books: [...prevState.books.filter(book=>book.id!==selectedBook.id),
+              {...prevState.books
+               .filter(book=>book.id===selectedBook.id).length===1
+              ?{ ...prevState.books
+               .find(book=>book.id===selectedBook.id),
+               shelf:value}
+             :{...selectedBook, shelf:value}}] 
     }));
    BooksAPI.update(this.state.books
-               .find(book=>book.id===id), value)
+               .find(book=>book.id===selectedBook.id), value)
   }
+   getShelf=(bookId)=>{
+          return this.state.books.find(book=>book.id===bookId)===undefined
+                  ?"none"
+                  :this.state.books.find(book=>book.id===bookId).shelf;
+   }
 
   render() {
     return (
     
       <Router>
         <div className="app">
-            <Route path='/search' render={()=><SearchPage/>}/>
+            <Route path='/search' render={()=>
+             <SearchPage
+               bookshelves={this.bookshelves} 
+               changeStatus={this.changeStatus}
+               getShelf={this.getShelf}
+              />}
+            />
             <Route exact path='/' render={()=>
               <Bookshelf 
                  bookshelves={this.bookshelves}
-                 books={this.state.books}
                  changeStatus={this.changeStatus}
+                 books={this.state.books}
              />}
             />
         </div>

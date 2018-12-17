@@ -4,11 +4,13 @@ class ChangeShelf extends Component{
   
   handleChange=event=>{
     event.preventDefault();    
-    this.props.onChangeStatus(this.props.id, event.target.value);
+    this.props.onChangeStatus(this.props.book, event.target.value);
     
   };
   render(){
-    const {bookshelves, shelf}=this.props;
+    const {bookshelves}=this.props;
+    const {shelf}=this.props.book;
+    
     return(
       
       <div className="book-shelf-changer">

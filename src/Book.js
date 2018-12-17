@@ -4,21 +4,23 @@ import ChangeShelf from './ChangeShelf'
 class Book extends Component{
   
   render(){
-    const {title, backgroundImage, authors, shelf, id, bookshelves} = this.props;
-
+    const {title, authors, shelf} = this.props.book;
+    const backgroundImage= this.props.book.imageLinks.thumbnail;
+    const {bookshelves, book}= this.props;
+    console.log(shelf, title, backgroundImage, authors);
     return(
       <div className="book">
           <div className="book-top">
           <div className="book-cover" style={{width: 128, height: 192, backgroundImage: `url("${backgroundImage}")`  }}></div>
           <ChangeShelf 
-            shelf={shelf} 
-            id={id} 
+            book={book} 
             bookshelves={bookshelves}
             onChangeStatus={this.props.changeStatus}
            />
         </div>
         <div className="book-title">{title}</div>
         <div className="book-authors">{authors}</div>
+       <div className="book-authors">Shelf....{book.shelf}</div>
       </div>                          
       )
   }

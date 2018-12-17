@@ -5,7 +5,7 @@ import Book from './Book'
 
 
 class Bookshelf extends Component{
- 
+
  
   render(){
     const {bookshelves, books, changeStatus}=this.props;
@@ -13,7 +13,7 @@ class Bookshelf extends Component{
     return(
      
            <div className="list-books">
-       {console.log(books.length +JSON.stringify(books))}
+       
                       <div className="list-books-title">
                         <h1>MyReads</h1>
                       </div>
@@ -26,11 +26,7 @@ class Bookshelf extends Component{
                               <ol className="books-grid">
                                {books.filter(book=>book.shelf===bookshelf.key).map((book, index)=><li key={index}>
                                   <Book                                     
-                                     backgroundImage={book.imageLinks.thumbnail}
-                                     title={book.title}
-                                     authors={book.authors}
-                                     shelf={book.shelf}
-                                     id={book.id}
+                                     book={book}
                                      bookshelves={bookshelves}
                                      changeStatus={changeStatus}
                                    />

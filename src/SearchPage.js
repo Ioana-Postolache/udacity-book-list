@@ -1,23 +1,37 @@
 import React, {Component} from 'react'
 import { Link } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
-
+import Book from './Book'
 
 class SearchPage extends Component{
   state = {
-    query: ''
+    query: '',
+    searchedBooks:[]
+    
   }
-  updateQuery = (query) =>{    
+  updateQuery = async (query) =>{    
     this.setState(()=>({
       query: query.trim()
-    }))
-    console.log(this.state.query);
+    }))    
   }
 
+ updateSearchedBooks = async (query, maxResults)=>{
+   await this.updateQuery(query);
+   const searchedBooksResults=await BooksAPI.search(query, maxResults);
+   this.setState(
+     {searchedBooks: searchedBooksResults
+      .map(book=> ({...book,               
+                shelf: this.props.getShelf(book.id) })
+            )}
+   );
+}
+   
   
   render(){
-    const {query} = this.state;
-    const maxResults=10;
+    const {query, searchedBooks} = this.state;
+    const {bookshelves, changeStatus} = this.props;
+    const maxResults = 10;
+    console.log(searchedBooks);
 
     return(
             <div className="search-books">
@@ -40,13 +54,19 @@ class SearchPage extends Component{
                             type="text" 
                             placeholder="Search by title or author"
                             value={query}
-                            onChange={(event)=>this.updateQuery(event.target.value)}/>
+                            onChange={(event)=>this.updateSearchedBooks(event.target.value, maxResults)}/>
 
                       </div>
                     </div>
                     <div className="search-books-results">
                       <ol className="books-grid">
-                       
+                       {searchedBooks.map((book, index)=><li key={index}>
+                                  <Book                                     
+                                     book={book}
+                                     bookshelves={bookshelves}
+                                     changeStatus={changeStatus}
+                                   />
+                                </li>)}
                       </ol>
                     </div>
                   </div>

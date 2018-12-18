@@ -3,7 +3,7 @@ import ChangeShelf from './ChangeShelf'
 
 const Book =(props)=>{
     const {title, authors} = props.book;
-    const backgroundImage= props.book.imageLinks===undefined?"":props.book.imageLinks.thumbnail;
+    const backgroundImage= props.book.imageLinks===undefined?"https://dummyimage.com/128x193/2e7c31/fff.png&text=Cover+Missing":props.book.imageLinks.thumbnail;
     const {bookshelves, book}= props;
     
     return(

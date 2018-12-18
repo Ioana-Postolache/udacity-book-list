@@ -1,20 +1,20 @@
-import React, {Component} from 'react'
+import React from 'react'
 
-class ChangeShelf extends Component{
+const ChangeShelf = (props)=>{
   
-  handleChange=event=>{
+   const handleChange=event=>{
     event.preventDefault();    
-    this.props.onChangeStatus(this.props.book, event.target.value);
+    props.onChangeStatus(props.book, event.target.value);
     
   };
-  render(){
-    const {bookshelves}=this.props;
-    const {shelf}=this.props.book;
+  
+    const {bookshelves}=props;
+    const {shelf}=props.book;
     
     return(
       
       <div className="book-shelf-changer">
-        <select value={shelf} onChange={this.handleChange}>
+        <select value={shelf} onChange={handleChange}>
           <option key="move" value="move" disabled>Move to...</option>
           {bookshelves.map(bookshelf=>
                                   {return <option key={bookshelf.key} value={bookshelf.key}>{bookshelf.value}</option>}
@@ -25,6 +25,6 @@ class ChangeShelf extends Component{
 
                                        
       )
-  }                                    
-}
+}                                    
+
 export default ChangeShelf;

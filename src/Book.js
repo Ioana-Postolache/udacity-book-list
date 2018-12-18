@@ -1,12 +1,10 @@
-import React, {Component} from 'react'
+import React from 'react'
 import ChangeShelf from './ChangeShelf'
 
-class Book extends Component{
-  
-  render(){
-    const {title, authors} = this.props.book;
-    const backgroundImage= this.props.book.imageLinks===undefined?"":this.props.book.imageLinks.thumbnail;
-    const {bookshelves, book}= this.props;
+const Book =(props)=>{
+    const {title, authors} = props.book;
+    const backgroundImage= props.book.imageLinks===undefined?"":props.book.imageLinks.thumbnail;
+    const {bookshelves, book}= props;
     
     return(
       <div className="book">
@@ -15,7 +13,7 @@ class Book extends Component{
           <ChangeShelf 
             book={book} 
             bookshelves={bookshelves}
-            onChangeStatus={this.props.changeStatus}
+            onChangeStatus={props.changeStatus}
            />
         </div>
         <div className="book-title">{title}</div>
@@ -25,6 +23,6 @@ class Book extends Component{
       )
   }
 
-}
+
 
 export default Book;

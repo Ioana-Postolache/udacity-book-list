@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import Book from './Book'
-
+import PropTypes from 'prop-types'
 
 
 const Bookshelf = (props)=>{
@@ -40,5 +40,9 @@ const Bookshelf = (props)=>{
                     </Link>
                     </div>
 )}
-
+Bookshelf.propTypes = {
+    bookshelves: PropTypes.array.isRequired,
+    changeStatus: PropTypes.func.isRequired,
+    books: PropTypes.array.isRequired
+  }
 export default Bookshelf;

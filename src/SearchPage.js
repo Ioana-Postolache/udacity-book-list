@@ -3,14 +3,21 @@ import { Link } from 'react-router-dom'
 import {DebounceInput} from 'react-debounce-input';
 import * as BooksAPI from './BooksAPI'
 import Book from './Book'
+import PropTypes from 'prop-types'
 
 class SearchPage extends Component{
+  
+  static propTypes = {
+    bookshelves: PropTypes.array.isRequired,
+    changeStatus: PropTypes.func.isRequired,
+    getShelf: PropTypes.func.isRequired
+  }
+
   state = {
     query: '',
     searchedBooks:[]
     
   }
-
  
  updateQuery = (query, maxResults) =>{    
     this.setState(()=>({

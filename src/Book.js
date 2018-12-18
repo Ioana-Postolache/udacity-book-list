@@ -17,8 +17,8 @@ const Book =(props)=>{
            />
         </div>
         <div className="book-title">{title}</div>
-        {authors!==undefined&&(<div className="book-authors">{authors.map((author, index)=> 
-                                       <div key={index}>{author}</div>)}
+        {authors!==undefined&&(<div className="book-authors">{authors.map(author=> 
+                                       <div key={author}>{author}</div>)}
                              </div>)}
 
       </div> 

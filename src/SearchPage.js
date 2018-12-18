@@ -85,7 +85,7 @@ class SearchPage extends Component{
                     {(searchedBooks!==null )&& (
                     <div className="search-books-results">
                       <ol className="books-grid">
-                       {searchedBooks.map((book, index)=><li key={index}>
+                       {searchedBooks.map(book=><li key={book.id}>
                                   <Book                                     
                                      book={book}
                                      bookshelves={bookshelves}

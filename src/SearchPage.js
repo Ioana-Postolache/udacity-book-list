@@ -11,17 +11,16 @@ class SearchPage extends Component{
   }
 
  
- updateQuery = (query) =>{    
+ updateQuery = (query, maxResults) =>{    
     this.setState(()=>({
       query: query
-    }))    
+    }))  
+   //added a gibberish value to the query variable, as seen on: https://github.com/BenQuirk/My-Reads-App-React/blob/master/src/Search.js
+   query.length===0 ? this.updateSearchedBooks('zzzz', maxResults) :this.updateSearchedBooks(query, maxResults)
   }
 
  updateSearchedBooks = async (query, maxResults)=>{
-   this.updateQuery(query);
-   query.length===0
-   ?this.setState({searchedBooks: null})
-   :BooksAPI.search(query, maxResults).then(
+   BooksAPI.search(query, maxResults).then(
          searchedBooksResults=>{
            searchedBooksResults!==undefined && searchedBooksResults.error===undefined
            ?this.setState(()=>(
@@ -72,7 +71,7 @@ class SearchPage extends Component{
                             type="text" 
                             placeholder="Search by title or author"
                             value={query}
-                            onChange={(event)=>this.updateSearchedBooks(event.target.value, maxResults)}/>
+                            onChange={(event)=>this.updateQuery(event.target.value, maxResults)}/>
 
                       </div>
                     </div>

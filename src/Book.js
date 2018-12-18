@@ -17,10 +17,12 @@ const Book =(props)=>{
            />
         </div>
         <div className="book-title">{title}</div>
-        <div className="book-authors">{authors.map((author, index)=> 
-                                       <div key={index}>{author}</div>)}</div>
+        {authors!==undefined&&(<div className="book-authors">{authors.map((author, index)=> 
+                                       <div key={index}>{author}</div>)}
+                             </div>)}
 
-      </div>                          
+      </div> 
+      
       )
   }
 

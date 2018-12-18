@@ -15,12 +15,14 @@ class SearchPage extends Component{
     this.setState(()=>({
       query: query
     }))  
-   //added a gibberish value to the query variable, as seen on: https://github.com/BenQuirk/My-Reads-App-React/blob/master/src/Search.js
-   query.length===0 ? this.updateSearchedBooks('zzzz', maxResults) :this.updateSearchedBooks(query, maxResults)
+   this.updateSearchedBooks(query, maxResults);
   }
 
- updateSearchedBooks = async (query, maxResults)=>{
-   BooksAPI.search(query, maxResults).then(
+ updateSearchedBooks = (query, maxResults)=>{
+   
+   query.length===0 
+   ? this.setState({searchedBooks: null})
+   : BooksAPI.search(query, maxResults).then(
          searchedBooksResults=>{
            searchedBooksResults!==undefined && searchedBooksResults.error===undefined
            ?this.setState(()=>(
@@ -28,12 +30,13 @@ class SearchPage extends Component{
                {...book, shelf: this.props.getShelf(book.id) })
                 )})
              )
-         : this.setState({searchedBooks: null})})          
+         : this.setState({searchedBooks: null})}) 
+            
    
 }
                     
- changeStatus=  async (selectedBook, value)=>{
-   await this.setState((prevState)=>({
+ changeStatus=  (selectedBook, value)=>{
+    this.setState((prevState)=>({
       searchedBooks: [...prevState.searchedBooks.filter(book=>book.id!==selectedBook.id),
               {...prevState.searchedBooks
                .filter(book=>book.id===selectedBook.id).length===1
@@ -50,6 +53,7 @@ class SearchPage extends Component{
     const {bookshelves} = this.props;
     const maxResults = 10;
     
+
     return(
             <div className="search-books">
                <div className="search-books-bar">

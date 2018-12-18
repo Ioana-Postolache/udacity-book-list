@@ -19,7 +19,7 @@ const Bookshelf = (props)=>{
                             <h2 className="bookshelf-title">{bookshelf.value}</h2>
                             <div className="bookshelf-books">
                               <ol className="books-grid">
-                               {books.filter(book=>book.shelf===bookshelf.key).map((book, index)=><li key={index}>
+                               {books.filter(book=>book.shelf===bookshelf.key).map(book=><li key={book.id}>
                                   <Book                                     
                                      book={book}
                                      bookshelves={bookshelves}

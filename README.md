@@ -1,14 +1,14 @@
 # MyReads Project
 
-##Start Project
+## Start Project
 After adding the dependencies (by running "npm  install"), the app can be launched by running "npm start".
 
-##Main Page
+## Main Page
 In the main page ("/"), you can see 3 lists (shelves) of books, categorized as follows: "Currently Reading", "Want to Read" and "Read". The books have the following details: title, authors and a thumbnail (where this type of data was available)
 By right clicking on each book, you can see the shelf they are currently on and can change their shelf. You can even remove the book from the main page by moving it to "None".
 When the browser is refreshed, the same information is displayed on the page.
 
-##Search Page
+## Search Page
 By clicking on the "+" icon in the bottom right hand corner, you are taken to a new page ("/search") where you can search for books that fall in one of the following categories below:
 'Android', 'Art', 'Artificial Intelligence', 'Astronomy', 'Austen', 'Baseball', 'Basketball', 'Bhagat', 'Biography', 'Brief', 'Business', 'Camus', 'Cervantes', 'Christie', 'Classics', 'Comics', 'Cook', 'Cricket', 'Cycling', 'Desai', 'Design', 'Development', 'Digital Marketing', 'Drama', 'Drawing', 'Dumas', 'Education', 'Everything', 'Fantasy', 'Film', 'Finance', 'First', 'Fitness', 'Football', 'Future', 'Games', 'Gandhi', 'Homer', 'Horror', 'Hugo', 'Ibsen', 'Journey', 'Kafka', 'King', 'Lahiri', 'Larsson', 'Learn', 'Literary Fiction', 'Make', 'Manage', 'Marquez', 'Money', 'Mystery', 'Negotiate', 'Painting', 'Philosophy', 'Photography', 'Poetry', 'Production', 'Programming', 'React', 'Redux', 'River', 'Robotics', 'Rowling', 'Satire', 'Science Fiction', 'Shakespeare', 'Singh', 'Swimming', 'Tale', 'Thrun', 'Time', 'Tolstoy', 'Travel', 'Ultimate', 'Virtual Reality', 'Web Development', 'iOS'
 
